@@ -5,13 +5,14 @@ import (
 	"net/http"
 )
 
-// Функция обработчик
-func hello(w http.ResponseWriter, req *http.Request) {
-	fmt.Print("Hello")
-}
-
 func main() {
-	http.HandleFunc("/hello", hello) // Обработка запроса к конкретному запросу
+	router := http.NewServeMux() //Создание собственного роутинга
+	NewHelloHandler(router)
+	server := http.Server{
+		Addr:    ":8081",
+		Handler: router,
+	} // конфигурация сервера
+
 	fmt.Println("Server is listening on port 8081")
-	http.ListenAndServe(":8081", nil) // Слушаем TCP-соединение на заданном порту
+	server.ListenAndServe() // Слушаем TCP-соединение на заданном порту
 }
