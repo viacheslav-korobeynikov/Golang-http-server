@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/viacheslav-korobeynikov/Golang-http-server/internal/hello"
 	"net/http"
 )
 
 func main() {
 	router := http.NewServeMux() //Создание собственного роутинга
-	NewHelloHandler(router)
+	hello.NewHelloHandler(router)
 	server := http.Server{
 		Addr:    ":8081",
 		Handler: router,
